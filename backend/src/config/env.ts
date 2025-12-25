@@ -5,6 +5,9 @@ const EnvSchema = z.object({
   // Server
   PORT: z.coerce.number().default(5000),
 
+  // Environment
+  NODE_ENV: z.string().min(1),
+
   // Database
   DB_HOST: z.string().min(1, "DB_HOST is required"),
   DB_PORT: z.coerce.number(),

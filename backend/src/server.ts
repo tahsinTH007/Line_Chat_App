@@ -25,8 +25,7 @@ async function bootstrap() {
     const server = createServer(app);
 
     // Use port from environment or default to 5000
-    // const port = env.PORT || 5001;
-    const port = 5005;
+    const port = env.PORT || 5000;
 
     // Start listening for incoming requests
     server.listen(port, () => {

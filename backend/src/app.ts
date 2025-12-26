@@ -1,8 +1,11 @@
 import express, { Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
+
 import { notFoundHandler } from "./middlewares/notFoundHandler.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { clerkMiddleware } from "./config/clerk.js";
+import { apiRouter } from "./routes/index.js";
 
 /**
  * Creates and configures the Express application.
@@ -13,6 +16,9 @@ import { errorHandler } from "./middlewares/errorHandler.js";
  */
 export function createApp(): Express {
   const app = express();
+
+  // Set clerk middleware
+  app.use(clerkMiddleware());
 
   // Set security HTTP headers
   app.use(helmet());
@@ -27,6 +33,9 @@ export function createApp(): Express {
 
   // Parse incoming JSON requests
   app.use(express.json());
+
+  //All API routes
+  app.use("/api", apiRouter);
 
   // Handle unmatched routes
   app.use(notFoundHandler);
